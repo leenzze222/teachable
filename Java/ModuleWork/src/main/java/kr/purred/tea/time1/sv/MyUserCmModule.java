@@ -5,11 +5,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import kr.purred.tea.time1.inter.UserCommon;
+import kr.purred.tea.time1.inter.UserModel;
 import kr.purred.tea.time1.model.MyUser;
 
-public class MyUserCmModule
+public class MyUserCmModule implements UserCommon
 {
 	private ObjectMapper om;
 
@@ -35,5 +41,17 @@ public class MyUserCmModule
 			.header ("accept", "application/json").asString ();
 
 		return om.readValue (response2.getBody (), MyUser.class);
+	}
+
+	@Override
+	public List<UserModel> getCommonAll () throws JsonProcessingException
+	{
+		return Arrays.stream (getUsers ()).map ((d) -> (UserModel) d).collect(Collectors.toList());
+	}
+
+	@Override
+	public UserModel getCommonOne (Long pk) throws JsonProcessingException
+	{
+		return getUser (pk);
 	}
 }
