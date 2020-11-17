@@ -12,8 +12,13 @@ public class ModuleWorkUser1
 {
 	public static void main (String[] args)
 	{
+		new ModuleWorkUser1 ().start ();
+	}
+
+	public void start ()
+	{
 		HttpResponse<String> response = Unirest.get ("http://192.168.4.1:8089/api/user")
-				.header ("accept", "application/json").asString ();
+			.header ("accept", "application/json").asString ();
 
 		// System.out.println (response.getBody ());
 
@@ -38,7 +43,7 @@ public class ModuleWorkUser1
 			}
 
 			HttpResponse<String> response2 = Unirest.get ("http://192.168.4.1:8089/api/user/" + no)
-					.header ("accept", "application/json").asString ();
+				.header ("accept", "application/json").asString ();
 
 			MfriendUser oneUser = om.readValue (response2.getBody (), MfriendUser.class);
 
