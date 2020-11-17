@@ -1,13 +1,9 @@
 package kr.purred.tea.time1;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import kong.unirest.HttpResponse;
-import kong.unirest.Unirest;
 import kr.purred.tea.time1.model.MyUser;
+import kr.purred.tea.time1.sv.MyUserCmModule;
 
 public class ModuleWorkUser2
 {
@@ -18,20 +14,11 @@ public class ModuleWorkUser2
 
 	public void start()
 	{
-		HttpResponse<String> response = Unirest.get ("http://192.168.4.1:8089/api/myuser")
-			.header ("accept", "application/json").asString ();
-
-		System.out.println (response.getBody ());
-
-		ObjectMapper om = new ObjectMapper ();
-
-		// LocalDate 처리를 위한 로직
-		om.registerModule (new JavaTimeModule ());
-		om.disable (SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		MyUserCmModule module = new MyUserCmModule ();
 
 		try
 		{
-			MyUser[] users = om.readValue (response.getBody (), MyUser[].class);
+			MyUser[] users = module.getUsers ();
 
 			long no = 0;
 
@@ -43,10 +30,7 @@ public class ModuleWorkUser2
 				System.out.println (user);
 			}
 
-			HttpResponse<String> response2 = Unirest.get ("http://192.168.4.1:8089/api/myuser/" + no)
-				.header ("accept", "application/json").asString ();
-
-			MyUser user = om.readValue (response2.getBody (), MyUser.class);
+			MyUser user = module.getUser (no);
 
 			System.out.println (user);
 
