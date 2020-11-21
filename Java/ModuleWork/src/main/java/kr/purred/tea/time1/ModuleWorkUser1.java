@@ -1,15 +1,9 @@
 package kr.purred.tea.time1;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import kong.unirest.HttpResponse;
-import kong.unirest.Unirest;
 import kr.purred.tea.time1.model.MfriendUser;
-import kr.purred.tea.time1.model.MyUser;
+import kr.purred.tea.time1.sv.MyFriendSv;
 import kr.purred.tea.time1.sv.common.ModulePrintSv;
-import kr.purred.tea.time1.sv.common.MyFriendSv;
 
 import java.util.List;
 
