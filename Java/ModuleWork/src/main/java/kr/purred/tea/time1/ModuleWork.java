@@ -9,8 +9,9 @@ public class ModuleWork
 
 	public void start ()
 	{
-		// TODO 전체 리스트
+//		 TODO totalList
 
-		// TODO 개별 리턴 하나
+
+		// TODO once return
 	}
 }
