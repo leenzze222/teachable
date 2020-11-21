@@ -22,9 +22,17 @@ public class ModuleWorkUser2
 	public static void main (String[] args)
 	{
 
+
+	public static void main (String[] args)
+	{
+		new ModuleWorkUser2 ().start ();
+	}
+
+	public void start()
+	{
 		HttpResponse<String> response = moduleHttpSv.getList("http://192.168.4.1:8089/api/myuser");
 
-//		System.out.println (response.getBody ());
+		System.out.println (response.getBody ());
 
 		ObjectMapper om = new ObjectMapper ();
 
